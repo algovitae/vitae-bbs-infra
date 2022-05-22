@@ -4,6 +4,13 @@ import * as cdk from 'aws-cdk-lib';
 import { VitaeBbsInfraStack } from '../lib/vitae-bbs-infra-stack';
 
 const app = new cdk.App();
+
+const stage = app.node.tryGetContext("stage")
+
+if (!stage) {
+  throw "stage not specified"
+}
+
 new VitaeBbsInfraStack(app, 'VitaeBbsInfraStack', {
   /* If you don't specify 'env', this stack will be environment-agnostic.
    * Account/Region-dependent features and context lookups will not work,
