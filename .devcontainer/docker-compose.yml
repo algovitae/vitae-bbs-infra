@@ -1,0 +1,14 @@
+version: "3"
+services:
+  vitae-bbs-infra:
+    build:
+      context: ../
+      dockerfile: ./.devcontainer/Dockerfile
+    volumes:
+      - ../:/workspace/vitae-bbs-infra:cached
+      - node_modules:/workspace/vitae-bbs-infra/node_modules
+      - "~/.aws:/home/vscode/.aws"
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: /bin/sh -c "while sleep 1000; do :; done"
+volumes:
+  node_modules:
