@@ -1,8 +1,9 @@
-# Welcome to your CDK TypeScript project
+# Vitae BBS Infra
 
-This is a blank project for CDK development with TypeScript.
+スレッド式掲示板のCDK。
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
+再現する手順は https://zenn.dev/link/comments/45620464c40f80 で解説しています。
+
 
 ## Useful commands
 
