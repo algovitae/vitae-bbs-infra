@@ -46,6 +46,9 @@ export class VitaeBbsDynamoDbStack extends Stack {
             partitionKey: { name: 'group_id', type: dynamodb.AttributeType.STRING },
             sortKey: { name: 'thread_id', type: dynamodb.AttributeType.STRING },
             billingMode: dynamodb.BillingMode.PAY_PER_REQUEST,
+        }).addGlobalSecondaryIndex({
+            indexName: 'thread_id_idx',
+            partitionKey: { name: 'thread_id', type: dynamodb.AttributeType.STRING }
         })
 
         const threadCommentTable = new dynamodb.Table(this, `ThreadComment`, {
