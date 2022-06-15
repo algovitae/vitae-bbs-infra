@@ -7,8 +7,11 @@ services:
     volumes:
       - ../:/workspace/vitae-bbs-infra:cached
       - node_modules:/workspace/vitae-bbs-infra/node_modules
+      - ../../vitae-bbs-backend:/workspace/vitae-bbs-backend:cached
+      - node_modules2:/workspace/vitae-bbs-backend/node_modules
       - "~/.aws:/home/vscode/.aws"
       - /var/run/docker.sock:/var/run/docker.sock
     command: /bin/sh -c "while sleep 1000; do :; done"
 volumes:
   node_modules:
+  node_modules2:
