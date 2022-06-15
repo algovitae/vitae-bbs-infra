@@ -11,54 +11,63 @@ export class VitaeBbsDynamoDbStack extends Stack {
 
         const userTable = new dynamodb.Table(this, `User`, {
             tableName: `User${suffix}`,
-            partitionKey: { name: 'user_id', type: dynamodb.AttributeType.STRING },
+            partitionKey: { name: 'id', type: dynamodb.AttributeType.STRING },
             billingMode: dynamodb.BillingMode.PAY_PER_REQUEST,
         });
 
         const userIdentityTable = new dynamodb.Table(this, `UserIdentity`, {
             tableName: `UserIdentity${suffix}`,
-            partitionKey: { name: 'email', type: dynamodb.AttributeType.STRING },
+            partitionKey: { name: 'id', type: dynamodb.AttributeType.STRING },
             billingMode: dynamodb.BillingMode.PAY_PER_REQUEST,
-        }).addGlobalSecondaryIndex({
-            indexName: 'user_id_idx',
-            partitionKey: { name: 'user_id', type: dynamodb.AttributeType.STRING }
+        });
+        userIdentityTable.addGlobalSecondaryIndex({
+            indexName: 'userIdIndex',
+            partitionKey: { name: 'userId', type: dynamodb.AttributeType.STRING }
+        });
+        userIdentityTable.addGlobalSecondaryIndex({
+            indexName: 'emailIndex',
+            partitionKey: { name: 'email', type: dynamodb.AttributeType.STRING }
         });
 
         const groupTable = new dynamodb.Table(this, `Group`, {
             tableName: `Group${suffix}`,
-            partitionKey: { name: 'group_id', type: dynamodb.AttributeType.STRING },
+            partitionKey: { name: 'id', type: dynamodb.AttributeType.STRING },
             billingMode: dynamodb.BillingMode.PAY_PER_REQUEST,
         });
 
         const membershipTable = new dynamodb.Table(this, `Membership`, {
             tableName: `Membership${suffix}`,
-            partitionKey: { name: 'user_id', type: dynamodb.AttributeType.STRING },
-            sortKey: { name: 'group_id', type: dynamodb.AttributeType.STRING },
+            partitionKey: { name: 'id', type: dynamodb.AttributeType.STRING },
             billingMode: dynamodb.BillingMode.PAY_PER_REQUEST,
-        }).addGlobalSecondaryIndex({
-            indexName: 'group_id_user_id_idx',
-            partitionKey: { name: 'group_id', type: dynamodb.AttributeType.STRING },
-            sortKey: { name: 'user_id', type: dynamodb.AttributeType.STRING },
+        });
+
+        membershipTable.addGlobalSecondaryIndex({
+            indexName: 'groupIdIndex',
+            partitionKey: { name: 'groupId', type: dynamodb.AttributeType.STRING },
+        });
+        membershipTable.addGlobalSecondaryIndex({
+            indexName: 'userIdIndex',
+            partitionKey: { name: 'userId', type: dynamodb.AttributeType.STRING },
         });
 
         const threadTable = new dynamodb.Table(this, `Thread`, {
             tableName: `Thread${suffix}`,
-            partitionKey: { name: 'group_id', type: dynamodb.AttributeType.STRING },
-            sortKey: { name: 'thread_id', type: dynamodb.AttributeType.STRING },
+            partitionKey: { name: 'id', type: dynamodb.AttributeType.STRING },
             billingMode: dynamodb.BillingMode.PAY_PER_REQUEST,
-        }).addGlobalSecondaryIndex({
-            indexName: 'thread_id_idx',
-            partitionKey: { name: 'thread_id', type: dynamodb.AttributeType.STRING }
+        });
+        threadTable.addGlobalSecondaryIndex({
+            indexName: 'groupIdIndex',
+            partitionKey: { name: 'groupId', type: dynamodb.AttributeType.STRING }
         })
 
         const threadCommentTable = new dynamodb.Table(this, `ThreadComment`, {
             tableName: `ThreadComment${suffix}`,
-            partitionKey: { name: 'thread_id', type: dynamodb.AttributeType.STRING },
-            sortKey: { name: 'comment_id', type: dynamodb.AttributeType.STRING },
+            partitionKey: { name: 'id', type: dynamodb.AttributeType.STRING },
             billingMode: dynamodb.BillingMode.PAY_PER_REQUEST,
-        }).addGlobalSecondaryIndex({
-            indexName: 'comment_id_idx',
-            partitionKey: { name: 'comment_id', type: dynamodb.AttributeType.STRING }
+        });
+        threadCommentTable.addGlobalSecondaryIndex({
+            indexName: 'threadIdIndex',
+            partitionKey: { name: 'threadId', type: dynamodb.AttributeType.STRING }
         })
     }
 }
