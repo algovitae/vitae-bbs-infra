@@ -7,7 +7,6 @@ import { join } from 'path';
 export class VitaeBbsApigwStack extends Stack {
     constructor(scope: Construct, id: string, props: StackProps & StageProps) {
         super(scope, id, props);
-        const suffix = props.stage[0].toUpperCase() + props.stage.slice(1)
 
         const role = new iam.Role(this, "ApolloFunctionRole", {
             assumedBy: new iam.ServicePrincipal("lambda.amazonaws.com"),
@@ -50,6 +49,20 @@ export class VitaeBbsApigwStack extends Stack {
                     resources: [
                         '*',
                     ]
+                  }),
+                  new iam.PolicyStatement({
+                    effect: iam.Effect.ALLOW,
+                    actions: [
+                      "kms:DescribeKey",
+                      "kms:GetPublicKey",
+                      "kms:Sign",
+                    ],
+                    resources: ["*"],
+                    conditions:{
+                      "StringLike": {
+                        "kms:RequestAlias": `alias/auth-${props.stage}`
+                      }
+                    }
                   })
                 ]
               })
