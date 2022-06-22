@@ -1,0 +1,7 @@
+{
+    "domain": {
+        "api": "api.example.com",
+        "web": "example.com",
+        "email": "example.com"
+    }
+}
