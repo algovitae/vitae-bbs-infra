@@ -84,7 +84,14 @@ export class VitaeBbsApigwStack extends Stack {
     });
 
 
-    const api = new apigw.RestApi(this, 'GraphQL API')
+    const api = new apigw.RestApi(this, 'GraphQL API', {
+      defaultCorsPreflightOptions: {
+        allowOrigins: apigw.Cors.ALL_ORIGINS,
+        allowMethods: apigw.Cors.ALL_METHODS,
+        allowHeaders: [...apigw.Cors.DEFAULT_HEADERS],
+        statusCode: 200,
+      }
+    })
     api.root.addMethod('GET', new apigw.LambdaIntegration(apolloFunction));
     api.root.addMethod('POST', new apigw.LambdaIntegration(apolloFunction));
 
