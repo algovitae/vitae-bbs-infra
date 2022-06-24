@@ -1,3 +1,5 @@
+cdk.context.json
+
 # Logs
 logs
 *.log

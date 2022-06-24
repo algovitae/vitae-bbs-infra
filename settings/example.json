@@ -3,5 +3,12 @@
         "api": "api.example.com",
         "web": "example.com",
         "email": "example.com"
+    },
+    "site": {
+        "title": "Yet Another BBS",
+        "maintainer": "algovitae"
+    },
+    "passphrase": {
+        "signup": "ひらけごま"
     }
 }

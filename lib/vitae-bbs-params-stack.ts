@@ -19,5 +19,19 @@ export class VitaeBbsParamsStack extends Stack {
             stringValue: JSON.stringify(params['domain']),
             tier: ssm.ParameterTier.STANDARD,
         });
+        new ssm.StringParameter(this, 'SiteParameter', {
+            allowedPattern: '.*',
+            description: 'site parameters',
+            parameterName: `Site${suffix}`,
+            stringValue: JSON.stringify(params['site']),
+            tier: ssm.ParameterTier.STANDARD,
+        });
+        new ssm.StringParameter(this, 'PassphraseParameter', {
+            allowedPattern: '.*',
+            description: 'passphrase parameters',
+            parameterName: `Passphrase${suffix}`,
+            stringValue: JSON.stringify(params['passphrase']),
+            tier: ssm.ParameterTier.STANDARD,
+        });
     }
 }
