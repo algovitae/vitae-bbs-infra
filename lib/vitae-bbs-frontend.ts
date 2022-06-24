@@ -56,6 +56,7 @@ export class VitaeBbsFrontendStack extends Stack {
         const distribution = new cloudfront.Distribution(this, 'distribution', {
             defaultRootObject: 'index.html',
             certificate,
+            domainNames: [webDomain],
             errorResponses: [
                 {
                     ttl: Duration.seconds(300),
