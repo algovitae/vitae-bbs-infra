@@ -5,6 +5,7 @@ import { VitaeBbsDynamoDbStack } from '../lib/vitae-bbs-dynamodb-stack';
 import { VitaeBbsApigwStack } from '../lib/vitae-bbs-apigw-stack';
 import { VitaeBbsKmsStack } from '../lib/vitae-bbs-kms';
 import { VitaeBbsParamsStack } from '../lib/vitae-bbs-params-stack';
+import { VitaeBbsFrontendStack } from '../lib/vitae-bbs-frontend';
 
 const env:cdk.Environment = { account: process.env.CDK_DEFAULT_ACCOUNT, region: process.env.CDK_DEFAULT_REGION };
 
@@ -31,4 +32,9 @@ new VitaeBbsDynamoDbStack(app, 'VitaeBbsDynamoDbStack', {
 new VitaeBbsApigwStack(app, 'VitaeBbsApigwStack', {
   env,
   stage
-})
+});
+
+new VitaeBbsFrontendStack(app, 'VitaeBbsFrontendStack', {
+  env,
+  stage
+});
