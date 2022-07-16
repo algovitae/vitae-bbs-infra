@@ -62,13 +62,13 @@ export class VitaeBbsFrontendStack extends Stack {
                     ttl: Duration.seconds(300),
                     httpStatus: 403,
                     responseHttpStatus: 403,
-                    responsePagePath: '/error.html',
+                    responsePagePath: '/index.html',
                 },
                 {
                     ttl: Duration.seconds(300),
                     httpStatus: 404,
                     responseHttpStatus: 404,
-                    responsePagePath: '/error.html',
+                    responsePagePath: '/index.html',
                 },
             ],
             defaultBehavior: {
